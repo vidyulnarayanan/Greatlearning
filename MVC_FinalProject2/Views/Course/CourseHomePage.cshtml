@@ -1,0 +1,19 @@
+﻿@model List<MVC_FinaLProject2.Models.CourseModel>
+
+@{
+    ViewBag.Title = "CourseHomePage";
+    Layout = "~/Views/Admin/AdminLayoutpage.cshtml";
+}
+
+<h2>COURSES</h2>
+<link href="~/Content/CSS/CourseStyle.css" rel="stylesheet" />
+<div class="course-blocks">
+    @foreach (var course in Model)
+    {
+        <div class="course-block">
+            <h3>@course.Title</h3>
+            <p>@course.Description</p>
+            <a href="@course.LearnMoreLink">Learn More</a>
+        </div>
+    }
+</div>

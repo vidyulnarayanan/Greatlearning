@@ -1,0 +1,64 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link href="~/Content/CSS/Layout.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+        <div class="container">
+            <!-- Logo and Heading -->
+            <a class="navbar-brand" href="#">
+                <img src="~/Content/Images/istockphoto-914519732-612x612.jpg" alt="Logo" class="d-inline-block align-text-top" />
+                &nbsp;&nbsp;<h2 class="claysys">GREAT LEARNING</h2>
+            </a>
+
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav ml-auto">
+                    <!-- Placing links on the right side -->
+                    <li class="nav-item">
+                        @Html.ActionLink("Home", "AdminHomePage", "Admin", new { area = "" }, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Login", "Login", "Login", new { area = "" }, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Register Now", "AddDetails", "Registration", new { area = "" }, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Courses", "CourseHomePage", "Course", new { area = "" }, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    @RenderBody()
+    <hr />
+    <footer>
+        <a href="https://www.facebook.com/ClaySys/" class="fa fa-facebook"></a>
+        <a href="https://twitter.com/i/flow/login?redirect_after_login=%2Fclaysys" class="fa fa-twitter"></a>
+        <a href="https://www.instagram.com/claysystech/?hl=en" class="fa fa-instagram"></a>
+        <a href="https://www.linkedin.com/company/claysys-technologies-pvt-ltd/?originalSubdomain=in" class="fa fa-linkedin"></a>
+        <p>&copy; Great Learning pvt ltd<br />2023 Your Company. All rights reserved.</p>
+    </footer>
+</body>
+</html>

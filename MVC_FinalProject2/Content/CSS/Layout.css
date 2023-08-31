@@ -1,0 +1,94 @@
+﻿/* navbar-style.css */
+
+/* Style the logo and heading */
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    text-decoration: none;
+    color: white;
+}
+
+    .navbar-brand img {
+         /* Adjust as needed */
+        width: 100px; 
+        height:100px;/* Adjust the logo width */
+    }
+
+/* Style the navigation links */
+.navbar-nav {
+    margin-left: auto; /* Push the links to the right */
+}
+
+    .navbar-nav .nav-item {
+        margin-right: 15px; /* Adjust the spacing between links */
+    }
+
+    .navbar-nav .nav-link {
+        font-family:Cambria;
+        font-size:20px;
+        color: white;
+       
+    }
+
+/* Style the collapsed navigation button */
+.navbar-toggler-icon {
+    color: white;
+}
+
+/* Media query to adjust the navbar for small screens */
+@media (max-width: 768px) {
+    .navbar-nav {
+        margin: 0; /* Reset margin for small screens */
+    }
+}
+.claysys {
+    padding-left: 20px;
+    font-family: Cambria;
+    font-weight: bold;
+}
+footer {
+    bottom: 0px;
+    background-color: #f2f2f2;
+    padding: 5px;
+    text-align: center;
+}
+.fa {
+    margin-right:5px;
+    padding: 10px;
+    font-size: 30px;
+    height:30px;
+    width: 30px;
+    text-align: center;
+    text-decoration: none;
+}
+
+    /* Add a hover effect if you want */
+    .fa:hover {
+        opacity: 0.7;
+    }
+
+/* Set a specific color for each brand */
+
+/* Facebook */
+.fa-facebook {
+    padding:10px;
+    background: #3B5998;
+    color: white;
+}
+
+/* Twitter */
+.fa-twitter {
+    padding: 10px;
+    background: #55ACEE;
+    color: white;
+}
+.fa-instagram {
+    padding: 10px;
+    background: #962fbf;
+    color: white;
+}
+.fa-linkedin {
+    background: #007bb5;
+    color: white;
+}
