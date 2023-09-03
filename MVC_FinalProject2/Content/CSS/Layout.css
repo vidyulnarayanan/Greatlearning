@@ -1,6 +1,16 @@
-﻿/* navbar-style.css */
+﻿/* Reset some default styles */
+a
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-/* Style the logo and heading */
+body {
+    background-color: gray; /* Background color for the entire page */
+    font-family: Verdana, sans-serif;
+}
+/* Logo and Heading */
 .navbar-brand {
     display: flex;
     align-items: center;
@@ -10,12 +20,21 @@
 }
 
     .navbar-brand img {
-         /* Adjust as needed */
-        width: 100px; 
-        height:100px;/* Adjust the logo width */
+        max-width: 100px; /* Adjust the maximum width of the logo */
+        max-height: 100px; /* Adjust the maximum height of the logo */
+        margin-right: 10px; /* Add margin to the right of the logo for spacing */
     }
 
-/* Style the navigation links */
+    /* Style the heading */
+    .navbar-brand h2.claysys {
+        font-family:'Sitka Heading';
+        font-size: 40px; /* Adjust the font size */
+        line-height: 1.2; /* Adjust the line height for better vertical alignment */
+        margin-top: 5px; /* Add a small margin to the top for spacing */
+        color: #fff; /* Text color for the heading */
+    }
+
+/* Navbar styles */
 .navbar-nav {
     margin-left: auto; /* Push the links to the right */
 }
@@ -25,70 +44,119 @@
     }
 
     .navbar-nav .nav-link {
-        font-family:Cambria;
-        font-size:20px;
+        font-family: Cambria;
+        font-size: 20px;
         color: white;
-       
+        transition: color 0.3s ease; /* Add a smooth transition for color changes */
     }
 
-/* Style the collapsed navigation button */
-.navbar-toggler-icon {
-    color: white;
+        /* Apply hover styles */
+        .navbar-nav .nav-link:hover {
+            color: #007BFF; /* Change text color on hover */
+        }
+
+        /* Style the active (current) page link */
+        .navbar-nav .nav-link.current-page {
+            background-color: #007BFF; /* Background color for active link */
+            color: white; /* Text color for active link */
+            font-weight: bold; /* Bold font for active link */
+        }
+
+/* Content-left section styles */
+.content-left {
+    background-color: #007BFF; /* Background color */
+    color: #fff; /* Text color */
+    padding: 20px; /* Padding around the content */
+    max-width: 600px; /* Limit the width of the content */
+    margin: 0 auto; /* Center the content horizontally */
+    text-align: center; /* Center-align the text */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* Add a subtle box shadow */
 }
 
-/* Media query to adjust the navbar for small screens */
-@media (max-width: 768px) {
-    .navbar-nav {
-        margin: 0; /* Reset margin for small screens */
+    .content-left h3 {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 10px;
     }
-}
-.claysys {
-    padding-left: 20px;
-    font-family: Cambria;
-    font-weight: bold;
-}
+
+    .content-left p {
+        font-size: 18px;
+        line-height: 1.4;
+        margin-top: 15px;
+    }
+
+    .content-left .btn-learn-more {
+        display: inline-block;
+        background-color: #fff;
+        color: #007BFF;
+        padding: 12px 30px;
+        font-size: 20px;
+        text-decoration: none;
+        border-radius: 25px;
+        margin-top: 20px;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+        .content-left .btn-learn-more:hover {
+            background-color: #007BFF;
+            color: #fff;
+        }
+
+/* Footer styles */
 footer {
     bottom: 0px;
     background-color: #f2f2f2;
     padding: 5px;
     text-align: center;
 }
+
+/* Social media icon styles */
 .fa {
-    margin-right:5px;
+    margin-right: 5px;
     padding: 10px;
     font-size: 30px;
-    height:30px;
+    height: 30px;
     width: 30px;
     text-align: center;
     text-decoration: none;
 }
 
-    /* Add a hover effect if you want */
     .fa:hover {
-        opacity: 0.7;
+        opacity: 0.7; /* Add a hover effect if you want */
     }
 
-/* Set a specific color for each brand */
-
-/* Facebook */
+/* Specific colors for social media brands */
 .fa-facebook {
-    padding:10px;
+    padding: 10px;
     background: #3B5998;
     color: white;
 }
 
-/* Twitter */
 .fa-twitter {
     padding: 10px;
     background: #55ACEE;
     color: white;
 }
+
 .fa-instagram {
     padding: 10px;
     background: #962fbf;
     color: white;
 }
+
 .fa-linkedin {
     background: #007bb5;
     color: white;
+}
+
+/* Style the user-info class */
+.user-info {
+    background-color: #007BFF; /* Background color */
+    color: white; /* Text color */
+    padding: 5px 10px; /* Padding to create space around the content */
+    border-radius: 5px; /* Rounded corners */
+    font-weight: bold; /* Bold text */
+    display: inline-block; /* Display as an inline block element */
+    margin-left: 10px; /* Add some margin to separate it from other elements */
 }

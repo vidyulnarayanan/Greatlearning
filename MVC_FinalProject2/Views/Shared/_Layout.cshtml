@@ -8,14 +8,23 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @using MVC_FinaLProject2.Repository;
 </head>
 <body>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
         <div class="container">
             <!-- Logo and Heading -->
             <a class="navbar-brand" href="#">
-                <img src="~/Content/Images/istockphoto-914519732-612x612.jpg" alt="Logo" class="d-inline-block align-text-top"/>
-                &nbsp;&nbsp;<h2 class="claysys">GREAT LEARNING</h2>
+                <img src="~/Content/Images/istockphoto-914519732-612x612.jpg" alt="Logo" class="d-inline-block align-text-top" />
+                &nbsp;&nbsp;<h2 class="claysys">
+                    GREAT LEARNING<br />
+                    @if (CurrentUserRepository.CurrentUser != null)
+                    {
+                        <div class="user-info">
+                            <span style="color: white;"><h4> <i class="fa fa-user"></i> @CurrentUserRepository.CurrentUser.UserName</h4></span>
+                        </div>
+                    }
+                </h2>
             </a>
 
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
@@ -24,22 +33,34 @@
             </button>
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav ml-auto">
-                    <!-- Placing links on the right side -->
                     <li class="nav-item">
                         @Html.ActionLink("Home", "AdminHomePage", "Admin", new { area = "" }, new { @class = "nav-link" })
                     </li>
-                    <li class="nav-item">
-                        @Html.ActionLink("Login", "Login", "Login", new { area = "" }, new { @class = "nav-link" })
-                    </li>
-                    <li class="nav-item">
-                        @Html.ActionLink("Register now", "AddDetails", "Registration", new { area = "" }, new { @class = "nav-link" })
-                    </li>
+
+                    <!-- Other navigation links -->
                     <li class="nav-item">
                         @Html.ActionLink("Courses", "CourseHomePage", "Course", new { area = "" }, new { @class = "nav-link" })
                     </li>
                     <li class="nav-item">
                         @Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })
                     </li>
+                    @if (CurrentUserRepository.CurrentUser == null)
+                    {
+                        <!-- Show these links when the user is not logged in -->
+                        <li class="nav-item">
+                            @Html.ActionLink("Login", "Login", "Login", new { area = "" }, new { @class = "nav-link" })
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("Register now", "AddDetails", "Registration", new { area = "" }, new { @class = "nav-link" })
+                        </li>
+                    }
+                    else
+                    {
+                        <!-- Show the "Sign Out" link when the user is logged in -->
+                        <li class="nav-item">
+                            @Html.ActionLink("Log out", "Logout", "Login", new { area = "" }, new { @class = "nav-link" })
+                        </li>
+                    }
                 </ul>
             </div>
         </div>
@@ -52,7 +73,7 @@
             <a href="https://twitter.com/i/flow/login?redirect_after_login=%2Fclaysys" class="fa fa-twitter"></a>
             <a href="https://www.instagram.com/claysystech/?hl=en" class="fa fa-instagram"></a>
             <a href="https://www.linkedin.com/company/claysys-technologies-pvt-ltd/?originalSubdomain=in" class="fa fa-linkedin"></a>
-            <p>&copy; Claysys technologies pvt ltd<br />2023 Your Company. All rights reserved.</p>
+            <p>&copy; Great Learning pvt ltd<br />2023 Your Company. All rights reserved.</p>
         </footer>
     </div>
 

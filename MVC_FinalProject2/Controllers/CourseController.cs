@@ -47,6 +47,24 @@ namespace MVC_FinaLProject2.Controllers
                     Description = "High-level programming language with dynamic semantics developed by Guido van Rossum",
                     LearnMoreLink = "https://www.w3schools.com/python/"
                 },
+                    new CourseModel
+                {
+                    Title = "REACT JS",
+                    Description = "This framework is an open-source JavaScript framework and library developed by Facebook",
+                    LearnMoreLink = "https://www.w3schools.com/REACT/default.asp"
+                },
+                    new CourseModel
+                {
+                    Title = "GOLANG",
+                    Description = "Go is used for a variety of applications like cloud and server side applications, DevOps, command line tools and much more",
+                    LearnMoreLink = "https://www.w3schools.com/go/"
+                },
+                    new CourseModel
+                {
+                    Title = "JAVA",
+                    Description = "A multi-platform, object-oriented, and network-centric language that can be used as a platform in itself",
+                    LearnMoreLink = "https://www.w3schools.com/java/"
+                },
                 // Add more courses...
             };
         }

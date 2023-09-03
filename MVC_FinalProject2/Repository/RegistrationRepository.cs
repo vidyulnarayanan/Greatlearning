@@ -117,12 +117,56 @@ namespace MVC_FinalProject.Repository
             }
 
         }
+        public Registration GetDetails(string Email)
+        {
+            try
+            {
+                Connection();
+          
+                SqlCommand com = new SqlCommand("SPS_Registration", connection);
+                com.CommandType = CommandType.StoredProcedure;
+                SqlDataAdapter da = new SqlDataAdapter(com);
+                DataTable dt = new DataTable();
+           
+                connection.Open();
+                da.Fill(dt);
+                DataRow dr =dt.AsEnumerable()
+               .FirstOrDefault(r=> r.Field<string>("Email") == Email);//.Select("@Email = " + Email).FirstOrDefault();
+                var retval = new Registration()
+                {
+                    Id = Convert.ToInt32(dr["Id"]),
+                    FirstName = Convert.ToString(dr["FirstName"]),
+                    LastName = Convert.ToString(dr["LastName"]),
+                    DateOfBirth = Convert.ToString(dr["DateOfBirth"]),
+                    Gender = Convert.ToString(dr["Gender"]),
+                    PhoneNumber = Convert.ToString(dr["PhoneNumber"]),
+                    Email = Convert.ToString(dr["Email"]),
+                    Address = Convert.ToString(dr["Address"]),
+                    City = Convert.ToString(dr["City"]),
+                    State = Convert.ToString(dr["State"]),
+                    Pincode = Convert.ToString(dr["Pincode"]),
+                    UserName = Convert.ToString(dr["UserName"]),
+                    Password = Convert.ToString(dr["Password"]),
+                    ConfirmPassword = Convert.ToString(dr["ConfirmPassword"]),
+                };
+                return retval;
+            }
+            catch (Exception)
+            {
 
-       /// <summary>
-       /// Updating already inserted values adn saving it
-       /// </summary>
-       /// <param name="registration"></param>
-       /// <returns></returns>
+                throw;
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+        }
+        /// <summary>
+        /// Updating already inserted values adn saving it
+        /// </summary>
+        /// <param name="registration"></param>
+        /// <returns></returns>
         public bool EditDetails(Registration registration)
         {
             try

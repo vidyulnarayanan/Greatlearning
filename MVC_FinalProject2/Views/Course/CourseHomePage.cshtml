@@ -1,19 +1,35 @@
 ﻿@model List<MVC_FinaLProject2.Models.CourseModel>
-
+@using MVC_FinaLProject2.Repository;
 @{
     ViewBag.Title = "CourseHomePage";
     Layout = "~/Views/Admin/AdminLayoutpage.cshtml";
 }
-
-<h2>COURSES</h2>
+<br />
 <link href="~/Content/CSS/CourseStyle.css" rel="stylesheet" />
+@*
+    @if (CurrentUserRepository.CurrentUser == null) {
+        <script>
+            document.write("LOGIN TO LEARN MORE ABOUT THE COURSES");
+        </script>
+    <br />
+    <br />
+    }*@
+
 <div class="course-blocks">
+
     @foreach (var course in Model)
     {
         <div class="course-block">
-            <h3>@course.Title</h3>
-            <p>@course.Description</p>
-            <a href="@course.LearnMoreLink">Learn More</a>
+            <h3 style="font-family: 'Sitka Heading';">@course.Title</h3>
+            <i><p>@course.Description</p></i>
+            @if (CurrentUserRepository.CurrentUser == null)
+            {
+                <a href="https://localhost:44315/Login/Login"> Log in for course details </a>
+            }
+            else
+            {
+                <a href="@course.LearnMoreLink">Learn More</a>
+            }
         </div>
     }
 </div>

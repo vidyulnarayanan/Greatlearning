@@ -18,6 +18,7 @@ namespace MVC_FinaLProject2.Repository
             connection = new SqlConnection(constr);
         }
 
+
         public bool CheckLogin(LoginModel login)
         {
             Connection();
