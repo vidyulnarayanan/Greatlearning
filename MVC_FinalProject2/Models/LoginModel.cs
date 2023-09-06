@@ -12,10 +12,15 @@ namespace MVC_FinaLProject2.Models
         [Required(ErrorMessage = "Email is required")]
         [EmailAddress(ErrorMessage = "Enter a valid email address")]
         [Display(Name = "Email")]
-        public String Email { get; set; }
+        public string Email { get; set; }
 
         [Display(Name = "Password")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
+
+       [Required(ErrorMessage = "Role is required")]
+        [Display(Name = "Role")]
+        public string Role { get; set; }
     }
+
 }

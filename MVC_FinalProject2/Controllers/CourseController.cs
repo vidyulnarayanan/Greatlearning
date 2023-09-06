@@ -1,78 +1,233 @@
-﻿using System.Collections.Generic;
+﻿using MVC_FinaLProject2.Models;
+using MVC_FinaLProject2.Repository;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
+using System.Data;
 using System.Web.Mvc;
-using MVC_FinaLProject2.Models;
-using static System.Net.WebRequestMethods;
+using System;
 
-namespace MVC_FinaLProject2.Controllers
+public class CourseController : Controller
 {
-    public class CourseController : Controller
+    private SqlConnection connection;
+
+    private void Connection()
     {
-        private List<CourseModel> GetCourses()
+        string constr = ConfigurationManager.ConnectionStrings["GetDatabaseConnection2"].ToString();
+        connection = new SqlConnection(constr);
+    }
+
+    public ActionResult CourseHomePage()
+    {
+        List<CourseModel> courses = GetCourses();
+
+        return View(courses);
+    }
+
+    public ActionResult AddCourse()
+    {
+        if (CurrentUserRepository.CurrentUser != null && CurrentUserRepository.CurrentUser.Role == "Admin")
         {
-            return new List<CourseModel>
+            return View();
+        }
+        else
+        {
+            return RedirectToAction("UnauthorizedAccess");
+        }
+    }
+
+    [HttpPost]
+    public ActionResult AddCourse(CourseModel course)
+    {
+        if (CurrentUserRepository.CurrentUser != null && CurrentUserRepository.CurrentUser.Role == "Admin")
+        {
+            if (ModelState.IsValid)
             {
-                new CourseModel
+                Connection(); // Establish the database connection
+
+                try
                 {
-                    Title = "JAVASCRIPT",
-                    Description = " A lightweight, interpreted, or just-in-time compiled programming language with first-class functions",
-                    LearnMoreLink = "https://www.w3schools.com/js/"
-                },
-                new CourseModel
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SPI_Courses", connection);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@Title", course.Title);
+                    command.Parameters.AddWithValue("@Description", course.Description);
+                    command.Parameters.AddWithValue("@Link", course.Link);
+                    command.ExecuteNonQuery();
+                }
+                finally
                 {
-                    Title = "PHP",
-                    Description = "Open-source general-purpose scripting language fit for server-side programming",
-                    LearnMoreLink = "https://www.w3schools.com/php/"
-                },
-                 new CourseModel
+                    connection.Close();
+                }
+
+                List<CourseModel> updatedCourses = GetCourses();
+
+                return View("CourseHomePage", updatedCourses);
+            }
+
+            return View(course);
+        }
+        else
+        {
+            return RedirectToAction("UnauthorizedAccess");
+        }
+    }
+
+    public ActionResult EditCourse(int id)
+    {
+        if (CurrentUserRepository.CurrentUser != null && CurrentUserRepository.CurrentUser.Role == "Admin")
+        {
+            CourseModel course = GetCourseById(id);
+
+            if (course != null)
+            {
+                return View(course);
+            }
+            else
+            {
+                return HttpNotFound();
+            }
+        }
+        else
+        {
+            return RedirectToAction("UnauthorizedAccess");
+        }
+    }
+
+    [HttpPost]
+    public ActionResult EditCourse(CourseModel course)
+    {
+        if (CurrentUserRepository.CurrentUser != null && CurrentUserRepository.CurrentUser.Role == "Admin")
+        {
+            if (ModelState.IsValid)
+            {
+                UpdateCourse(course);
+
+                List<CourseModel> updatedCourses = GetCourses();
+
+                return View("CourseHomePage", updatedCourses);
+            }
+
+            return View(course);
+        }
+        else
+        {
+            return RedirectToAction("UnauthorizedAccess");
+        }
+    }
+
+    public ActionResult DeleteCourse(int Id)
+    {
+        if (CurrentUserRepository.CurrentUser != null && CurrentUserRepository.CurrentUser.Role == "Admin")
+        {
+            Connection(); // Establish the database connection
+
+            try
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand("SPD_Courses", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@Id", Id);
+                command.ExecuteNonQuery();
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            List<CourseModel> updatedCourses = GetCourses();
+
+            return View("CourseHomePage", updatedCourses);
+        }
+        else
+        {
+            return RedirectToAction("UnauthorizedAccess");
+        }
+    }
+
+    private List<CourseModel> GetCourses()
+    {
+        Connection();
+        List<CourseModel> courses = new List<CourseModel>();
+
+        try
+        {
+            connection.Open();
+            SqlCommand command = new SqlCommand("SPS_Courses", connection);
+            command.CommandType = CommandType.StoredProcedure;
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                CourseModel course = new CourseModel
                 {
-                    Title = "C#.NET",
-                    Description = "Enables developers to build many types of secure and robust applications that run in .NET",
-                    LearnMoreLink = "https://www.w3schools.com/cs/index.php"
-                },
-                  new CourseModel
-                {
-                    Title = "SQL",
-                    Description = "Standardized programming language used to manage relational databases and perform various operations on the data in them",
-                    LearnMoreLink = "https://www.w3schools.com/sql/"
-                },
-                   new CourseModel
-                {
-                    Title = "AJAX",
-                    Description = "Allows web pages to be updated asynchronously by exchanging small amounts of data with the server behind",
-                    LearnMoreLink = "https://www.w3schools.com/js/js_ajax_intro.asp"
-                },
-                    new CourseModel
-                {
-                    Title = "PYTHON",
-                    Description = "High-level programming language with dynamic semantics developed by Guido van Rossum",
-                    LearnMoreLink = "https://www.w3schools.com/python/"
-                },
-                    new CourseModel
-                {
-                    Title = "REACT JS",
-                    Description = "This framework is an open-source JavaScript framework and library developed by Facebook",
-                    LearnMoreLink = "https://www.w3schools.com/REACT/default.asp"
-                },
-                    new CourseModel
-                {
-                    Title = "GOLANG",
-                    Description = "Go is used for a variety of applications like cloud and server side applications, DevOps, command line tools and much more",
-                    LearnMoreLink = "https://www.w3schools.com/go/"
-                },
-                    new CourseModel
-                {
-                    Title = "JAVA",
-                    Description = "A multi-platform, object-oriented, and network-centric language that can be used as a platform in itself",
-                    LearnMoreLink = "https://www.w3schools.com/java/"
-                },
-                // Add more courses...
-            };
+                    Id = Convert.ToInt32(reader["Id"]),
+                    Title = reader["Title"].ToString(),
+                    Description = reader["Description"].ToString(),
+                    Link = reader["Link"].ToString()
+                };
+                courses.Add(course);
+            }
+        }
+        finally
+        {
+            connection.Close();
         }
 
-        public ActionResult CourseHomePage()
+        return courses;
+    }
+
+    private CourseModel GetCourseById(int Id) { 
+    
+        Connection();
+        CourseModel course = null;
+
+        try
         {
-            List<CourseModel> courses = GetCourses();
-            return View(courses);
+            connection.Open();
+            SqlCommand command = new SqlCommand("SELECT Id, Title, Description, Link FROM Table_Courses WHERE Id = @Id", connection);
+            command.Parameters.AddWithValue("@Id", Id);
+
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                if (reader.Read())
+                {
+                    course = new CourseModel
+                    {
+                        Id = Convert.ToInt32(reader["Id"]),
+                        Title = reader["Title"].ToString(),
+                        Description = reader["Description"].ToString(),
+                        Link = reader["Link"].ToString()
+                    };
+                }
+            }
+        }
+        finally
+        {
+            connection.Close();
+        }
+
+        return course;
+    }
+
+    private void UpdateCourse(CourseModel course)
+    {
+        Connection();
+
+        try
+        {
+            connection.Open();
+            SqlCommand command = new SqlCommand("SPU_Courses", connection);
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.AddWithValue("@Id", course.Id);
+            command.Parameters.AddWithValue("@Title", course.Title);
+            command.Parameters.AddWithValue("@Description", course.Description);
+            command.Parameters.AddWithValue("@Link", course.Link);
+            command.ExecuteNonQuery();
+        }
+        finally
+        {
+            connection.Close();
         }
     }
 }

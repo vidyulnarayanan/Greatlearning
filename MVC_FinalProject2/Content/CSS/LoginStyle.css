@@ -1,77 +1,59 @@
-﻿
-.form-horizontal {
-    margin: 20px auto;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-    max-width: 400px; /* Limit the form width for readability */
-    background-color: #fff;
-}
+﻿body {
+        background-color: #f8f9fa;
+    }
 
-/* Add margin to form elements */
-.form-group {
-    margin-bottom: 20px;
-}
+    .form-horizontal {
+        margin: 20px auto;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 400px;
+        background-color: #fff;
+    }
 
-    /* Add some space below the submit button */
+    .form-group {
+        margin-bottom: 20px;
+    }
+
     .form-group:last-child {
         margin-bottom: 0;
     }
 
-/* Style labels */
-.control-label {
-    margin-bottom: 8px;
-    font-weight: bold;
-    color: #333;
-}
+    .control-label {
+        margin-bottom: 8px;
+        font-weight: bold;
+        color: #333;
+    }
 
-/* Style text inputs */
-.form-control {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    width: 100%;
-    transition: border-color 0.2s;
-}
+    .form-control {
+        padding: 12px;
+        font-size: 16px;
+    }
 
     .form-control:focus {
         border-color: #007bff;
     }
 
-/* Style the submit button */
-input[type="submit"] {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.2s, transform 0.2s;
-}
+    input[type="submit"] {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.2s, transform 0.2s;
+    }
 
     input[type="submit"]:hover {
         background-color: #0056b3;
         transform: translateY(-2px);
     }
 
-/* Style the "Register now?" link */
-.register-link {
-    margin-top: 15px;
-    display: inline-block;
-    color: #007bff;
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.2s;
-}
-
-    .register-link:hover {
-        color: #0056b3;
+    .head h2 {
+        text-align: center;
+        margin: 0 0 20px;
+        color: #007bff;
+        font-size: 24px;
+        font-weight: bold;
     }
-.head h2 {
-    text-align: center;
-    margin: 0 0 20px; /* Add margin to the bottom to space it from the form */
-    color: #007bff;
-    font-size: 2em; /* Increase font size for emphasis */
-    font-weight:bold;
-}

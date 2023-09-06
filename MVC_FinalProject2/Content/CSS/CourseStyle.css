@@ -1,4 +1,5 @@
-﻿/* Styles for the course blocks container */
+﻿
+/* Styles for the course blocks container */
 .course-blocks {
     display: flex;
     flex-wrap: wrap;
@@ -16,7 +17,7 @@
 
     .course-block h3 {
         margin-top: 0;
-        font-family:'Sitka Heading';
+        font-family: 'Sitka Heading';
     }
 
     .course-block a {
@@ -24,4 +25,19 @@
         margin-top: 10px;
         color: #007bff;
         text-decoration: none;
+    }
+
+/* Styles for the course links (Learn More and Delete Course) */
+.course-links {
+    margin-right: 50px; /* Add space between links */
+}
+
+/* Styles for the admin actions container */
+.admin-actions {
+    padding-top: 10px; /* Add padding to the Add Course button */
+}
+
+    /* Styles for the Add Course button */
+    .admin-actions .btn {
+        padding: 10px; /* Adjust padding as needed */
     }

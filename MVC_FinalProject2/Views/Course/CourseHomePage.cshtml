@@ -4,32 +4,43 @@
     ViewBag.Title = "CourseHomePage";
     Layout = "~/Views/Admin/AdminLayoutpage.cshtml";
 }
-<br />
 <link href="~/Content/CSS/CourseStyle.css" rel="stylesheet" />
-@*
-    @if (CurrentUserRepository.CurrentUser == null) {
-        <script>
-            document.write("LOGIN TO LEARN MORE ABOUT THE COURSES");
-        </script>
-    <br />
-    <br />
-    }*@
 
-<div class="course-blocks">
+<div class="course-container">
+    <!-- FOREACH LOOP TO ITERATE THROUGH THE COURSES AND DISPLAY THE DATA -->
+    <div class="course-blocks">
+        @foreach (var course in Model)
+        {
+            <div class="course-block">
+                <h3 style="font-family: 'Sitka Heading';">@course.Title</h3>
+                <i><p>@course.Description</p></i>
 
-    @foreach (var course in Model)
+                <!-- Check if the user is logged in -->
+                @if(CurrentUserRepository.CurrentUser == null)
+                {
+                    <a href="https://localhost:44315/Login/Login"> Log in for course details </a>
+                }
+                else
+                {
+                    <a href="@course.Link">Learn More</a>
+
+                    <!-- Display "Edit Course" and "Delete Course" links for admin -->
+                    if (CurrentUserRepository.CurrentUser.Role == "Admin")
+                    {
+            <a href="@Url.Action("EditCourse", "Course", new { id = course.Id })">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Edit Course</a>
+
+            <a href="@Url.Action("DeleteCourse", "Course", new { id = course.Id })">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Delete Course</a>
+                }
+                }
+</div>
+        }
+    </div>
+
+    <!-- Display admin actions if the user is an admin -->
+    @if (CurrentUserRepository.CurrentUser != null && CurrentUserRepository.CurrentUser.Role == "Admin")
     {
-        <div class="course-block">
-            <h3 style="font-family: 'Sitka Heading';">@course.Title</h3>
-            <i><p>@course.Description</p></i>
-            @if (CurrentUserRepository.CurrentUser == null)
-            {
-                <a href="https://localhost:44315/Login/Login"> Log in for course details </a>
-            }
-            else
-            {
-                <a href="@course.LearnMoreLink">Learn More</a>
-            }
+        <div class="admin-actions">
+            <a href="@Url.Action("AddCourse", "Course")" class="btn btn-primary">Add Course</a>
         </div>
     }
 </div>

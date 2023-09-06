@@ -1,18 +1,31 @@
 ﻿@{
-    ViewBag.Title = "Contact";
+    ViewBag.Title = "CONTACT";
 }
+
+<!-- Link your CSS file -->
+<link href="~/Content/CSS/ContactStyle.css" rel="stylesheet" />
 <main aria-labelledby="title">
     <h2 id="title">@ViewBag.Title</h2>
     <address>
         Great Learning Pvt Ltd<br />
         An online learning platform<br />
-        Kakkanad,Kochi<br />
+        Kakkanad, Kochi<br />
         Kerala-682030<br />
-        Ph:9845623400
+        Ph: 9845623400
     </address>
 
     <address>
-        <strong>Support:</strong>   <a href="mailto:Support@example.com">greatlearningsupport@gmail.com</a><br />
-        <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">greatlearningmarketing@rediff.com</a>
+        <strong>Support:</strong> <a href="mailto:greatlearningsupport@gmail.com">greatlearningsupport@gmail.com</a><br />
+        <strong>Marketing:</strong> <a href="mailto:greatlearningmarketing@rediff.com">greatlearningmarketing@rediff.com</a>
     </address>
+
+    <!-- Add a query box -->
+    <div class="query-box">
+        <h3>Send Us Your Query</h3>
+        <form action="#" method="post">
+            <textarea id="user-query" name="user-query" rows="4" cols="50"></textarea>
+            <br />
+            <input type="submit" value="Submit">
+        </form>
+    </div>
 </main>

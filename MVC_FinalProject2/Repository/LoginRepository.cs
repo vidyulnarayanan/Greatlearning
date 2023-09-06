@@ -14,17 +14,22 @@ namespace MVC_FinaLProject2.Repository
 
         private void Connection()
         {
-            string constr = ConfigurationManager.ConnectionStrings["GetDatabaseConnection"].ToString();
+            string constr = ConfigurationManager.ConnectionStrings["GetDatabaseConnection2"].ToString();
             connection = new SqlConnection(constr);
         }
 
-
+        /// <summary>
+        /// CHECKING LOGIN BY VALIDATING EMAIL ID AND PASSWORD
+        /// </summary>
+        /// <param name="login"></param>
+        /// <returns></returns>
         public bool CheckLogin(LoginModel login)
         {
             Connection();
-            SqlCommand command = new SqlCommand("SELECT COUNT(*) FROM Table_Registration WHERE Email=@Email AND Password=@Password", connection);
+            SqlCommand command = new SqlCommand("SELECT COUNT(*) FROM Table_Registration2 WHERE Email=@Email AND Password=@Password AND Role=@Role", connection);
             command.Parameters.AddWithValue("@Email", login.Email);
             command.Parameters.AddWithValue("@Password", login.Password);
+            command.Parameters.AddWithValue("@Role", login.Role);
 
             int rowsAffected = 0;
 

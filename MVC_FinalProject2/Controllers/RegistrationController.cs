@@ -10,19 +10,26 @@ namespace MVC_FinaLProject2.Controllers
 {
     public class RegistrationController : Controller
     {
-        // GET: Registration
+        /// <summary>
+        /// METHOD TO SELECT DATA FROM REGISTRATION FORM TO SQL
+        /// </summary>
+        /// <returns></returns>
         public ActionResult GetDetails()
         {
             RegistrationRepository RegRepo = new RegistrationRepository();
             ModelState.Clear();
             return View(RegRepo.GetDetails());
         }
-
         public ActionResult AddDetails()
         {
             return View();
         }
 
+        /// <summary>
+        /// METHOD TO INSERT DATA INTO SQL TABLE
+        /// </summary>
+        /// <param name="registration"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult AddDetails(Registration registration)
         {
@@ -43,6 +50,12 @@ namespace MVC_FinaLProject2.Controllers
                 return View();
             }
         }
+
+        /// <summary>
+        /// METHOD TO EDIT DETAILS
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
         public ActionResult EditDetails(int? Id)
         {
             RegistrationRepository RegRepo = new RegistrationRepository();
@@ -64,6 +77,12 @@ namespace MVC_FinaLProject2.Controllers
             }
         }
 
+        /// <summary>
+        /// METHOD TO DELETE DETAILS
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public ActionResult DeleteDetails(int Id, Registration obj)
         {
             try

@@ -8,6 +8,8 @@ namespace MVC_FinalProject.Models
 {
     public class Registration
     {
+
+
         [Display(Name = "id")]
         public int Id { get; set; }
         [Display(Name = "Firstname")]
@@ -45,6 +47,10 @@ namespace MVC_FinalProject.Models
         [Display(Name = "Username")]
 
         public string UserName { get; set; }
+
+        [Required(ErrorMessage = "Role is required")]
+        [Display(Name = "Role")]
+        public string Role { get; set; }
         [Display(Name = "Password")]
         [DataType(DataType.Password)]
 

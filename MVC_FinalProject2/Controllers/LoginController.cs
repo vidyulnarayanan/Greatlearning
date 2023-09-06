@@ -1,5 +1,4 @@
 ﻿using System.Web.Mvc;
-using System.Web.Security; // Add this using directive for FormsAuthentication
 using System.Windows.Forms;
 using MVC_FinalProject.Repository;
 using MVC_FinaLProject2.Models;
@@ -32,10 +31,18 @@ namespace MVC_FinalProject.Controllers
                 bool isValidLogin = loginRepository.CheckLogin(model);
 
                 if (isValidLogin)
-                { 
-                    CurrentUserRepository.CurrentUser = registrationRepository.GetDetails(model.Email);               
+                {
+                    CurrentUserRepository.CurrentUser = registrationRepository.GetDetails(model.Email);
 
-                    return RedirectToAction("CourseHomePage", "Course");
+                    // Check the role and redirect accordingly
+                    if (model.Role == "Admin")
+                    {
+                        return RedirectToAction("AdminHomePage", "Admin");
+                    }
+                    else if (model.Role == "User")
+                    {
+                        return RedirectToAction("CourseHomePage", "Course");
+                    }
                 }
                 else
                 {

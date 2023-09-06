@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Web;
+using System.Web.Security;
 
 namespace MVC_FinalProject.Repository
 {
@@ -16,12 +17,12 @@ namespace MVC_FinalProject.Repository
 
         private void Connection()
         {
-            string constr = ConfigurationManager.ConnectionStrings["GetDatabaseConnection"].ToString();
+            string constr = ConfigurationManager.ConnectionStrings["GetDatabaseConnection2"].ToString();
             connection = new SqlConnection(constr);
         }
 
        /// <summary>
-       /// Adding Details of user to the list
+       /// ADDING DETAILS OF USERS TO LIST
        /// </summary>
        /// <param name="registration"></param>
        /// <returns></returns>
@@ -30,7 +31,7 @@ namespace MVC_FinalProject.Repository
             try
             {
                 Connection();
-                SqlCommand com = new SqlCommand("SPI_Registration", connection);
+                SqlCommand com = new SqlCommand("SPI2_Registration", connection);
                 com.CommandType = CommandType.StoredProcedure;
 
                 com.Parameters.AddWithValue("@FirstName", registration.FirstName);
@@ -44,6 +45,7 @@ namespace MVC_FinalProject.Repository
                 com.Parameters.AddWithValue("@State", registration.State);
                 com.Parameters.AddWithValue("@Pincode", registration.Pincode);
                 com.Parameters.AddWithValue("@UserName", registration.UserName);
+                com.Parameters.AddWithValue("@Role", registration.Role);
                 com.Parameters.AddWithValue("@Password", registration.Password);
                 com.Parameters.AddWithValue("@ConfirmPassword", registration.ConfirmPassword);
                 connection.Open();
@@ -68,7 +70,7 @@ namespace MVC_FinalProject.Repository
             }
         }
         /// <summary>
-        /// Displaying Inserted Data of Registered Users
+        /// DISPLAYING INSERTED DATA OF USERS
         /// </summary>
         /// <returns></returns>
 
@@ -78,7 +80,7 @@ namespace MVC_FinalProject.Repository
             {
                 Connection();
                 List<Registration> Registrationlist = new List<Registration>();
-                SqlCommand com = new SqlCommand("SPS_Registration", connection);
+                SqlCommand com = new SqlCommand("SPS2_Registration", connection);
                 com.CommandType = CommandType.StoredProcedure;
                 SqlDataAdapter da = new SqlDataAdapter(com);
                 DataTable dt = new DataTable();
@@ -100,6 +102,7 @@ namespace MVC_FinalProject.Repository
                             State = Convert.ToString(dr["State"]),
                             Pincode = Convert.ToString(dr["Pincode"]),
                             UserName = Convert.ToString(dr["UserName"]),
+                            Role = Convert.ToString(dr["Role"]),
                             Password = Convert.ToString(dr["Password"]),
                             ConfirmPassword = Convert.ToString(dr["ConfirmPassword"]),
 
@@ -117,13 +120,20 @@ namespace MVC_FinalProject.Repository
             }
 
         }
+
+        /// <summary>
+        /// THIS GETDETAILS METHOD IS USED TO LOGIN SESSION MANAGEMENT 
+        /// TO DISPLAY LOGGED IN USER DETAIL IN NAVIGATION BAR
+        /// </summary>
+        /// <param name="Email"></param>
+        /// <returns></returns>
         public Registration GetDetails(string Email)
         {
             try
             {
                 Connection();
           
-                SqlCommand com = new SqlCommand("SPS_Registration", connection);
+                SqlCommand com = new SqlCommand("SPS2_Registration", connection);
                 com.CommandType = CommandType.StoredProcedure;
                 SqlDataAdapter da = new SqlDataAdapter(com);
                 DataTable dt = new DataTable();
@@ -146,6 +156,7 @@ namespace MVC_FinalProject.Repository
                     State = Convert.ToString(dr["State"]),
                     Pincode = Convert.ToString(dr["Pincode"]),
                     UserName = Convert.ToString(dr["UserName"]),
+                    Role = Convert.ToString(dr["Role"]),
                     Password = Convert.ToString(dr["Password"]),
                     ConfirmPassword = Convert.ToString(dr["ConfirmPassword"]),
                 };
@@ -163,7 +174,7 @@ namespace MVC_FinalProject.Repository
 
         }
         /// <summary>
-        /// Updating already inserted values adn saving it
+        /// UPDATING ALREADY ISERTED DATA
         /// </summary>
         /// <param name="registration"></param>
         /// <returns></returns>
@@ -172,7 +183,7 @@ namespace MVC_FinalProject.Repository
             try
             {
                 Connection();
-                SqlCommand com = new SqlCommand("SPU_Registration", connection);
+                SqlCommand com = new SqlCommand("SPU2_Registration", connection);
                 com.CommandType = CommandType.StoredProcedure;
 
                 com.Parameters.AddWithValue("@FirstName", registration.FirstName);
@@ -186,6 +197,7 @@ namespace MVC_FinalProject.Repository
                 com.Parameters.AddWithValue("@State", registration.State);
                 com.Parameters.AddWithValue("@Pincode", registration.Pincode);
                 com.Parameters.AddWithValue("@UserName", registration.UserName);
+                com.Parameters.AddWithValue("@Role", registration.Role);
                 com.Parameters.AddWithValue("@Password", registration.Password);
                 com.Parameters.AddWithValue("@ConfirmPassword", registration.ConfirmPassword);
                 connection.Open();
@@ -212,7 +224,7 @@ namespace MVC_FinalProject.Repository
         }
 
         /// <summary>
-        /// Delete particular user
+        /// DELETION OPERATION ON INSERTED DATA
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
@@ -221,7 +233,7 @@ namespace MVC_FinalProject.Repository
             try
             {
                 Connection();
-                SqlCommand com = new SqlCommand("SPD_Registration", connection);
+                SqlCommand com = new SqlCommand("SPD2_Registration", connection);
                 com.CommandType = CommandType.StoredProcedure;
                 com.Parameters.AddWithValue("Id", Id);
                 connection.Open();

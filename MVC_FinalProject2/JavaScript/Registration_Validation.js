@@ -109,16 +109,6 @@ function Checkemail() {
 }
 
 //GENDER VALIDATION
-/*function Checkgender() {
-
-    let genderValue = document.getElementById("gender")
-    if (genderValue.value.trim() === "") {
-        setErrorFor(genderValue, "Gender is required");
-    }
-    else {
-        setSuccessFor(genderValue);
-    }
-}*/
 
 function Checkgender() {
     let radioButtons = document.querySelectorAll('.radio-button');

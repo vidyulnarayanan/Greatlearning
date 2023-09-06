@@ -19,30 +19,32 @@
 <body>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
         <div class="container">
-            <!-- Logo and Heading -->
+            <!-- LOGO AND HEADING -->
             <a class="navbar-brand" href="#">
                 <img src="~/Content/Images/istockphoto-914519732-612x612.jpg" height="100px" width="100px" alt="Logo" class="d-inline-block align-text-top" />
-                &nbsp;&nbsp;<h2 class="claysys"> GREAT LEARNING<br />   
+                &nbsp;&nbsp;<h2 class="claysys">
+                    GREAT LEARNING<br />
+                    <!--CODE TO DISPLAY LOGGED IN USERS USERNAME IN THE NAVIGATION BAR-->
                     @if (CurrentUserRepository.CurrentUser != null)
                     {
                         <div class="user-info">
-                            <span style="color: white;"><h4> <i class="fa fa-user"></i> @CurrentUserRepository.CurrentUser.UserName</h4></span>
+                            <span style="color: white;"><h4> <i class="fa fa-user"></i>@CurrentUserRepository.CurrentUser.Role @CurrentUserRepository.CurrentUser.UserName</h4></span>
                         </div>
                     }
                 </h2>
             </a>
-
+            <!--NAVIGATION BAR-->
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+            <div class="collapse navbar-collapse">
                 <ul class="navbar-nav ml-auto">
+                    <!-- Use ml-auto here -->
+                    <!-- OTHER NAVIGATION LINKS -->
                     <li class="nav-item">
                         @Html.ActionLink("Home", "AdminHomePage", "Admin", new { area = "" }, new { @class = "nav-link" })
                     </li>
-
-                    <!-- Other navigation links -->
                     <li class="nav-item">
                         @Html.ActionLink("Courses", "CourseHomePage", "Course", new { area = "" }, new { @class = "nav-link" })
                     </li>
@@ -51,7 +53,7 @@
                     </li>
                     @if (CurrentUserRepository.CurrentUser == null)
                     {
-                        <!-- Show these links when the user is not logged in -->
+                        <!-- SHOW THESE LINKS WHEN THE USER IS NOT LOGGED IN -->
                         <li class="nav-item">
                             @Html.ActionLink("Login", "Login", "Login", new { area = "" }, new { @class = "nav-link" })
                         </li>
@@ -59,9 +61,18 @@
                             @Html.ActionLink("Register now", "AddDetails", "Registration", new { area = "" }, new { @class = "nav-link" })
                         </li>
                     }
+                    else if (CurrentUserRepository.CurrentUser.Role == "Admin")
+                    {
+                        <li class="nav-item">
+                            @Html.ActionLink("Users List", "GetDetails", "Registration", new { area = "" }, new { @class = "nav-link" })
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("Log out", "Logout", "Login", new { area = "" }, new { @class = "nav-link" })
+                        </li>
+                    }
                     else
                     {
-                        <!-- Show the "Sign Out" link when the user is logged in -->
+                        <!-- SHOW THE SIGN OUT LINK WHEN USER IS LOGGED IN-->
                         <li class="nav-item">
                             @Html.ActionLink("Log out", "Logout", "Login", new { area = "" }, new { @class = "nav-link" })
                         </li>
@@ -70,15 +81,16 @@
             </div>
         </div>
     </nav>
-        <!-- Additional content about the importance of Great Learning for programming languages -->
-        @RenderBody()
-        <hr />
-        <footer>
-            <a href="https://www.facebook.com/ClaySys/" class="fa fa-facebook"></a>
-            <a href="https://twitter.com/i/flow/login?redirect_after_login=%2Fclaysys" class="fa fa-twitter"></a>
-            <a href="https://www.instagram.com/claysystech/?hl=en" class="fa fa-instagram"></a>
-            <a href="https://www.linkedin.com/company/claysys-technologies-pvt-ltd/?originalSubdomain=in" class="fa fa-linkedin"></a>
-            <p>&copy; Great Learning pvt ltd<br />2023 Your Company. All rights reserved.</p>
-        </footer>
+
+    @RenderBody()
+    <hr />
+    <!--FOOTER SECTION WITH SOCIAL MEDIA ICONS AND LINKS TO THE RESPECTIVE PAGES-->
+    <footer>
+        <a href="https://www.facebook.com/ClaySys/" class="fa fa-facebook"></a>
+        <a href="https://twitter.com/i/flow/login?redirect_after_login=%2Fclaysys" class="fa fa-twitter"></a>
+        <a href="https://www.instagram.com/claysystech/?hl=en" class="fa fa-instagram"></a>
+        <a href="https://www.linkedin.com/company/claysys-technologies-pvt-ltd/?originalSubdomain=in" class="fa fa-linkedin"></a>
+        <p>&copy; Great Learning pvt ltd<br />2023 Your Company. All rights reserved.</p>
+    </footer>
 </body>
 </html>

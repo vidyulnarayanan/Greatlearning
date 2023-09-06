@@ -13,18 +13,19 @@
 <body>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
         <div class="container">
-            <!-- Logo and Heading -->
+            <!-- LOGO AND HEADING -->
             <a class="navbar-brand" href="#">
                 <img src="~/Content/Images/istockphoto-914519732-612x612.jpg" alt="Logo" class="d-inline-block align-text-top" />
                 &nbsp;&nbsp;<h2 class="claysys">
-                    GREAT LEARNING<br />
-                    @if (CurrentUserRepository.CurrentUser != null)
-                    {
-                        <div class="user-info">
-                            <span style="color: white;"><h4> <i class="fa fa-user"></i> @CurrentUserRepository.CurrentUser.UserName</h4></span>
-                        </div>
-                    }
-                </h2>
+    GREAT LEARNING<br />
+    <!--CODE TO DISPLAY LOGGED IN USERS USERNAME IN THE NAVIGATION BAR-->
+    @if (CurrentUserRepository.CurrentUser != null)
+    {
+        <div class="user-info">
+            <span style="color: white;"><h4> <i class="fa fa-user"></i>@CurrentUserRepository.CurrentUser.Role  @CurrentUserRepository.CurrentUser.UserName</h4></span>
+        </div>
+    }
+</h2>
             </a>
 
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
@@ -33,11 +34,10 @@
             </button>
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav ml-auto">
+                    <!-- OTHER NAVIGATION LINKS -->
                     <li class="nav-item">
                         @Html.ActionLink("Home", "AdminHomePage", "Admin", new { area = "" }, new { @class = "nav-link" })
                     </li>
-
-                    <!-- Other navigation links -->
                     <li class="nav-item">
                         @Html.ActionLink("Courses", "CourseHomePage", "Course", new { area = "" }, new { @class = "nav-link" })
                     </li>
@@ -46,7 +46,7 @@
                     </li>
                     @if (CurrentUserRepository.CurrentUser == null)
                     {
-                        <!-- Show these links when the user is not logged in -->
+                        <!-- SHOW THESE LINKS WHEN THE USER IS NOT LOGGED IN -->
                         <li class="nav-item">
                             @Html.ActionLink("Login", "Login", "Login", new { area = "" }, new { @class = "nav-link" })
                         </li>
@@ -54,9 +54,18 @@
                             @Html.ActionLink("Register now", "AddDetails", "Registration", new { area = "" }, new { @class = "nav-link" })
                         </li>
                     }
+                    else if (CurrentUserRepository.CurrentUser.Role == "Admin")
+                    {
+                        <li class="nav-item">
+                            @Html.ActionLink("Users List", "GetDetails", "Registration", new { area = "" }, new { @class = "nav-link" })
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("Log out", "Logout", "Login", new { area = "" }, new { @class = "nav-link" })
+                        </li>
+                    }
                     else
                     {
-                        <!-- Show the "Sign Out" link when the user is logged in -->
+                        <!-- SHOW THE SIGN OUT LINK WHEN USER IS LOGGED IN-->
                         <li class="nav-item">
                             @Html.ActionLink("Log out", "Logout", "Login", new { area = "" }, new { @class = "nav-link" })
                         </li>
@@ -68,6 +77,7 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
+        <!--FOOTER SECTION WITH SOCIAL MEDIA ICONS AND LINKS TO THE RESPECTIVE PAGES-->
         <footer>
             <a href="https://www.facebook.com/ClaySys/" class="fa fa-facebook"></a>
             <a href="https://twitter.com/i/flow/login?redirect_after_login=%2Fclaysys" class="fa fa-twitter"></a>

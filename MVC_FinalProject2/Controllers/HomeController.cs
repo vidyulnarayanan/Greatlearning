@@ -20,6 +20,7 @@ namespace MVC_FinaLProject2.Controllers
             return View();
         }
 
+        //APPLICATION CONTACT PAGE
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";

@@ -1,0 +1,30 @@
+﻿@model MVC_FinaLProject2.Models.CourseModel
+@using MVC_FinaLProject2.Repository;
+@{
+    ViewBag.Title = "Delete Course";
+    Layout = "~/Views/Admin/AdminLayoutpage.cshtml";
+}
+<link href="~/Content/CSS/CourseStyle.css" rel="stylesheet" />
+
+<div class="course-container">
+    <h2>Delete Course</h2>
+
+    <p>Are you sure you want to delete the following course?</p>
+    <div class="course-block">
+        <h3 style="font-family: 'Sitka Heading';">@Model.Title</h3>
+        <i><p>@Model.Description</p></i>
+        <a href="@Model.Link">Learn More</a>
+    </div>
+
+    @using (Html.BeginForm("DeleteCourse", "Course", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Delete" class="btn btn-danger" />
+                @Html.ActionLink("Cancel", "CourseHomePage", "Course", null, new { @class = "btn btn-default" })
+            </div>
+        </div>
+    }
+</div>

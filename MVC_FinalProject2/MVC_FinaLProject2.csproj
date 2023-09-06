@@ -126,7 +126,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
-    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -155,7 +154,9 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\CSS\AddCourseStyle.css" />
     <Content Include="Content\CSS\AdminHomePageStyle.css" />
+    <Content Include="Content\CSS\ContactStyle.css" />
     <Content Include="Content\CSS\CourseStyle.css" />
     <Content Include="Content\CSS\ImageStyleSheet.css" />
     <Content Include="Content\CSS\Layout.css" />
@@ -228,6 +229,9 @@
     <Content Include="Views\Shared\Login.cshtml" />
     <Content Include="Views\Course\CourseHomePage.cshtml" />
     <Content Include="Views\Course\CourseLayoutPage.cshtml" />
+    <Content Include="Views\Course\AddCourse.cshtml" />
+    <Content Include="Views\Course\DeleteCourse.cshtml" />
+    <Content Include="Views\Course\EditCourse.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -14,7 +14,7 @@
 <body>
     <br />
     <br />
-    <!-- Add this div before the slideshow-container div -->
+    <!--A section which gives intro to home page and contains a link to courses page-->
     <div class="content-left">
         <h3>Welcome to Great Learning!</h3>
         <p>We provide top-quality online courses for programming languages. Whether you're a beginner or an experienced developer, our platform has something for everyone.</p>
@@ -22,6 +22,7 @@
     </div>
     <br />
 
+    <!--Slideshow division with image carousel-->
     <div class="slideshow-container" style="display:flex;align-items:center;justify-content:center">
         <div class="mySlides">
             <img src="~/Content/Images/pexels-lukas-574069.jpg" style="max-width: 600px" />
@@ -68,7 +69,8 @@
         </div>
     </div>
     <br>
-
+    
+    <!--Dots to represent image carousel movement-->
     <div style="text-align:center">
         <span class="dot"></span>
         <span class="dot"></span>
@@ -82,6 +84,7 @@
         <span class="dot"></span>
     </div>
 
+    <!--Loop to iterate through slides on loop and display all the slides-->
     <script>
         let slideIndex = 0;
         showSlides();
