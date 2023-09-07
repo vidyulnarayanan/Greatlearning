@@ -16,7 +16,7 @@ namespace MVC_FinalProject.Models
         public string FirstName { get; set; }
         [Display(Name = "Lastname")]
         public string LastName { get; set; }
-        [Display(Name = "Date of birth")]
+        [Display(Name = "DOB")]
         [DataType(DataType.Date)]
 
         public string DateOfBirth { get; set; }

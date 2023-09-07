@@ -158,6 +158,7 @@
     <Content Include="Content\CSS\AdminHomePageStyle.css" />
     <Content Include="Content\CSS\ContactStyle.css" />
     <Content Include="Content\CSS\CourseStyle.css" />
+    <Content Include="Content\CSS\EditDetailsStyle.css" />
     <Content Include="Content\CSS\ImageStyleSheet.css" />
     <Content Include="Content\CSS\Layout.css" />
     <Content Include="Content\CSS\LoginStyle.css" />

@@ -5,6 +5,7 @@
 }
 <link href="~/Content/CSS/Registration_Validation_Style.css" rel="stylesheet" />
 <link href="~/Content/CSS/RegistrationStyle.css" rel="stylesheet" />
+
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
@@ -14,6 +15,8 @@
     <h4>REGISTRATION</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @using MVC_FinaLProject2.Repository;
+    @using System.Web.Mvc;
     <div class="form-group">
         @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
@@ -23,7 +26,6 @@
             <small></small>
         </div>
     </div>
-
     <div class="form-group">
         @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
@@ -80,31 +82,50 @@
             <small></small>
         </div>
     </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control", @placeholder = "City", @Id = "city", @onfocusout = "Checkcity()" } })
-            @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
-            <small></small>
-        </div>
-    </div>
-
     <div class="form-group">
         @Html.LabelFor(model => model.State, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control", @placeholder = "State", @Id = "state", @onfocusout = "Checkstate()" } })
+            @Html.DropDownListFor(model => model.State, (IEnumerable<SelectListItem>)ViewBag.StatesList, "-- Select State --", new { @class = "form-control", @placeholder = "State", @Id = "state", @onfocusout = "checkstate()" })
             @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
             <small></small>
         </div>
     </div>
-
+    <div class="form-group">
+        @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.City, (IEnumerable<SelectListItem>)ViewBag.CityList, "-- Select City --", new { @class = "form-control", @placeholder = "City", @Id = "city", @onfocusout = "checkcity()" })
+            @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+            <small></small>
+        </div>
+    </div>
     <div class="form-group">
         @Html.LabelFor(model => model.Pincode, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.Pincode, new { htmlAttributes = new { @class = "form-control", @placeholder = "Pincode", @Id = "pincode", @onfocusout = "Checkpincode()" } })
             @Html.ValidationMessageFor(model => model.Pincode, "", new { @class = "text-danger" })
             <small></small>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Role, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @if (CurrentUserRepository.CurrentUser != null && CurrentUserRepository.CurrentUser.Role != null)
+            {
+                @Html.DropDownListFor(model => model.Role, new SelectList(new[]
+                {
+                    new SelectListItem { Text = "Admin", Value = "Admin" },
+                    new SelectListItem { Text = "User", Value = "User" }
+                }, "Value", "Text"), "-- Select Role --", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Role, "", new { @class = "text-danger" })
+            }
+            else
+            {
+                @Html.DropDownListFor(model => model.Role, new SelectList(new[]
+               {
+                   new SelectListItem { Text = "User", Value = "User" }
+               }, "Value", "Text"), "-- Select Role --", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Role, "", new { @class = "text-danger" })
+            }
         </div>
     </div>
 
@@ -117,25 +138,12 @@
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(model => model.Role, htmlAttributes: new { @class = "control-label col-md-2" })
-               <div class="col-md-10">
-                   @Html.DropDownListFor(model => model.Role, new SelectList(new[]
-                   {
-                       @*new SelectListItem { Text = "Admin", Value = "Admin" },*@
-                       new SelectListItem { Text = "User", Value = "User" }
-                   }, "Value", "Text"), "-- Select Role --", new { @class = "form-control" })
-                   @Html.ValidationMessageFor(model => model.Role, "", new { @class = "text-danger" })
-               </div>
-        </div>
-    <div class="form-group">
         @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @placeholder = "Password", @Id = "password", @onfocusout = "Checkpassword()" } })
+            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @placeholder = "Password", @Id = "mpassword", @onfocusout = "Checkpassword()" } })
             @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-            <small></small>
         </div>
     </div>
-
     <div class="form-group">
         @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
@@ -154,11 +162,6 @@
 </div>
 }
 <script src="~/JavaScript/Registration_Validation.js"></script>
-
-<div>
-    
-</div>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

@@ -1,5 +1,6 @@
 ﻿using MVC_FinalProject.Models;
 using MVC_FinalProject.Repository;
+using MVC_FinaLProject2.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,31 @@ namespace MVC_FinaLProject2.Controllers
         }
         public ActionResult AddDetails()
         {
+            var states = new List<SelectListItem>
+    {
+        new SelectListItem { Text = "Andhra Pradesh", Value = "Andhra Pradesh" },
+        new SelectListItem { Text = "Arunachal Pradesh", Value = "Arunachal Pradesh" },
+        new SelectListItem { Text = "Kerala ", Value = "Kerala" },
+        new SelectListItem { Text = "Tamil Nadu ", Value = "Tamil Nadu" },
+        new SelectListItem { Text = "Assam ", Value = "Assam" },
+        new SelectListItem { Text = "Rajasthan ", Value = "Rajasthan" },
+        new SelectListItem { Text = "Karnataka ", Value = "Karnataka" },
+        new SelectListItem { Text = "Gujarat ", Value = "Gujarat" },  
+    };
+            ViewBag.StatesList = states;
+
+            var city = new List<SelectListItem>
+    {
+        new SelectListItem { Text = "Thrissur", Value = "Thrissur" },
+        new SelectListItem { Text = "Kochi", Value = "Kochi" },
+        new SelectListItem { Text = "Trivandrum", Value = "Trivandrum" },
+        new SelectListItem { Text = "Kozhikode", Value = "Kozhikode" },
+        new SelectListItem { Text = "Wayanad", Value = "Wayanad" },
+        new SelectListItem { Text = "Delhi", Value = "Delhi" },
+        new SelectListItem { Text = "Mumbai", Value = "Mumbai" },
+        new SelectListItem { Text = "Bangalore", Value = "Bangalore" },
+    };
+            ViewBag.CityList = city;
             return View();
         }
 
@@ -43,7 +69,14 @@ namespace MVC_FinaLProject2.Controllers
                         ViewBag.Message = "User Details Added Succesfully";
                     }
                 }
-                return RedirectToAction("GetDetails");
+                if (CurrentUserRepository.CurrentUser.Role == "Admin")
+                {
+                    return RedirectToAction("GetDetails");
+                }
+                else
+                {
+                    return RedirectToAction("Login", "Login");
+                }
             }
             catch
             {
@@ -69,7 +102,14 @@ namespace MVC_FinaLProject2.Controllers
             {
                 RegistrationRepository RegRepo = new RegistrationRepository();
                 RegRepo.EditDetails(obj);
-                return RedirectToAction("GetDetails");
+                if (CurrentUserRepository.CurrentUser.Role == "Admin")
+                {
+                    return RedirectToAction("GetDetails");
+                }
+                else
+                {
+                    return RedirectToAction("AdminHomePage","Admin");
+                }
             }
             catch
             {

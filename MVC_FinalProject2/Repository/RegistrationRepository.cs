@@ -186,6 +186,7 @@ namespace MVC_FinalProject.Repository
                 SqlCommand com = new SqlCommand("SPU2_Registration", connection);
                 com.CommandType = CommandType.StoredProcedure;
 
+                com.Parameters.AddWithValue("@Id", registration.Id);
                 com.Parameters.AddWithValue("@FirstName", registration.FirstName);
                 com.Parameters.AddWithValue("@LastName", registration.LastName);
                 com.Parameters.AddWithValue("@DateOfBirth", registration.DateOfBirth);

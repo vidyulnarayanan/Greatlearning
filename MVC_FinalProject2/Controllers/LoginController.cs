@@ -47,11 +47,8 @@ namespace MVC_FinalProject.Controllers
                 else
                 {
                     MessageBox.Show("Invalid Login");
-                    //ModelState.AddModelError("","Invalid login attempt");
                 }
             }
-
-            // If we reach this point, the login attempt was invalid
             return View(model);
         }
 

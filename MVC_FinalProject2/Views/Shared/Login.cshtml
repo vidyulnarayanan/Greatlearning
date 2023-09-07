@@ -4,11 +4,10 @@
     ViewBag.Title = "Login";
     Layout = "~/Views/Admin/AdminLayoutpage.cshtml";
 }
-<link href="~/Content/CSS/LoginStyle.css" rel="stylesheet" />
 @using (Html.BeginForm())
 {
         @Html.AntiForgeryToken()
-
+<link href="~/Content/CSS/LoginStyle.css" rel="stylesheet" />
 <div class="form-horizontal">
     <div class="head">
         <h2>LOGIN</h2>

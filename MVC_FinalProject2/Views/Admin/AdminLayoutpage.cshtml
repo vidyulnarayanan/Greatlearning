@@ -42,27 +42,37 @@
                 <ul class="navbar-nav ml-auto">
                     <!-- Use ml-auto here -->
                     <!-- OTHER NAVIGATION LINKS -->
-                    <li class="nav-item">
-                        @Html.ActionLink("Home", "AdminHomePage", "Admin", new { area = "" }, new { @class = "nav-link" })
-                    </li>
-                    <li class="nav-item">
-                        @Html.ActionLink("Courses", "CourseHomePage", "Course", new { area = "" }, new { @class = "nav-link" })
-                    </li>
-                    <li class="nav-item">
-                        @Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })
-                    </li>
+
                     @if (CurrentUserRepository.CurrentUser == null)
                     {
                         <!-- SHOW THESE LINKS WHEN THE USER IS NOT LOGGED IN -->
+                        <li class="nav-item">
+                            @Html.ActionLink("Home", "AdminHomePage", "Admin", new { area = "" }, new { @class = "nav-link" })
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("Courses", "CourseHomePage", "Course", new { area = "" }, new { @class = "nav-link" })
+                        </li>
                         <li class="nav-item">
                             @Html.ActionLink("Login", "Login", "Login", new { area = "" }, new { @class = "nav-link" })
                         </li>
                         <li class="nav-item">
                             @Html.ActionLink("Register now", "AddDetails", "Registration", new { area = "" }, new { @class = "nav-link" })
                         </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })
+                        </li>
                     }
                     else if (CurrentUserRepository.CurrentUser.Role == "Admin")
                     {
+                        <li class="nav-item">
+                            @Html.ActionLink("Home", "AdminHomePage", "Admin", new { area = "" }, new { @class = "nav-link" })
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("Edit courses", "CourseHomePage", "Course", new { area = "" }, new { @class = "nav-link" })
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("Add user", "AddDetails", "Registration", new { area = "" }, new { @class = "nav-link" })
+                        </li>
                         <li class="nav-item">
                             @Html.ActionLink("Users List", "GetDetails", "Registration", new { area = "" }, new { @class = "nav-link" })
                         </li>
@@ -73,6 +83,18 @@
                     else
                     {
                         <!-- SHOW THE SIGN OUT LINK WHEN USER IS LOGGED IN-->
+                        <li class="nav-item">
+                            @Html.ActionLink("Home", "AdminHomePage", "Admin", new { area = "" }, new { @class = "nav-link" })
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("Courses", "CourseHomePage", "Course", new { area = "" }, new { @class = "nav-link" })
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("Edit profile", "EditDetails", "Registration", new { id = CurrentUserRepository.CurrentUser.Id }, new { @class = "nav-link" })
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })
+                        </li>
                         <li class="nav-item">
                             @Html.ActionLink("Log out", "Logout", "Login", new { area = "" }, new { @class = "nav-link" })
                         </li>
